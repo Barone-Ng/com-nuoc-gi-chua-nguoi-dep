@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Cơm nước gì chưa người đẹp? 🍚💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #fff6ec;
+    --cream-deep: #ffece0;
+    --pink: #ff9fb8;
+    --pink-deep: #ff7aa2;
+    --lav: #c9b6ff;
+    --mint: #b7e8c8;
+    --peach: #ffcf9e;
+    --ink: #6b4a4a;
+    --ink-soft: #9a7a7a;
+    --card: #ffffff;
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html,body{
+    margin:0; padding:0; min-height:100%;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(255,159,184,0.25), transparent 42%),
+      radial-gradient(circle at 88% 12%, rgba(201,182,255,0.25), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(183,232,200,0.25), transparent 50%),
+      var(--cream);
+    font-family:'Be Vietnam Pro', sans-serif;
+    color: var(--ink);
+    overflow-x:hidden;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+  }
+  .deco{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    font-size: 22px; opacity:.35;
+  }
+  .deco span{ position:absolute; }
+
+  .wrap{
+    position:relative; z-index:1;
+    max-width: 640px;
+    margin:0 auto;
+    padding: 28px 16px 50px;
+    text-align:center;
+  }
+
+  .mascot{
+    font-size: 54px;
+    display:inline-block;
+    animation: wiggle 2.4s ease-in-out infinite;
+  }
+  @keyframes wiggle{
+    0%,100%{ transform: rotate(-4deg) translateY(0); }
+    50%{ transform: rotate(4deg) translateY(-4px); }
+  }
+
+  h1{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size: clamp(24px, 6vw, 36px);
+    color: var(--pink-deep);
+    margin: 8px 0 4px;
+    line-height:1.25;
+  }
+  h1 .accent{ color: var(--lav); }
+  .sub{
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .counter{
+    display:inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--pink-deep);
+    background: #fff;
+    border: 1.5px solid var(--pink);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-weight:600;
+    box-shadow: 0 3px 0 rgba(255,122,162,.25);
+    transition: transform .15s ease;
+  }
+  .counter.bump{ transform: scale(1.12) rotate(-2deg); }
+
+  .bubble{
+    position:relative;
+    display:inline-block;
+    margin: 20px auto 0;
+    background: var(--ink);
+    color: #fff;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size: 14.5px;
+    padding: 10px 18px;
+    border-radius: 16px;
+    min-height: 20px;
+    opacity:0;
+    transform: translateY(6px) scale(.95);
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  .bubble::after{
+    content:"";
+    position:absolute; left:50%; bottom:-8px; transform: translateX(-50%);
+    border-width: 8px 7px 0 7px;
+    border-style: solid;
+    border-color: var(--ink) transparent transparent transparent;
+  }
+  .bubble.show{ opacity:1; transform: translateY(0) scale(1); }
+
+  .stage{
+    position:relative;
+    margin-top: 22px;
+    height: min(420px, 56vh);
+    min-height: 300px;
+    border-radius: 28px;
+    background: repeating-linear-gradient(135deg, #fff, #fff 14px, var(--cream-deep) 14px, var(--cream-deep) 28px);
+    border: 3px dashed var(--pink);
+    overflow:hidden;
+  }
+  .stage::before{
+    content: "🍽 khu vực gọi món";
+    position:absolute; top:12px; left:50%; transform: translateX(-50%);
+    font-size: 12px; color: var(--pink-deep); font-weight:700;
+    letter-spacing: .5px;
+    background: #fff;
+    padding: 4px 12px;
+    border-radius: 999px;
+    box-shadow: 0 2px 0 rgba(255,122,162,.2);
+  }
+
+  .dish{
+    position:absolute;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size: 16px;
+    color: var(--ink);
+    border: none;
+    border-radius: 20px;
+    padding: 14px 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 rgba(0,0,0,.1);
+    transition: top .32s cubic-bezier(.34,1.56,.64,1), left .32s cubic-bezier(.34,1.56,.64,1), transform .12s ease;
+    white-space: nowrap;
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dish:active{ transform: scale(.92) rotate(-3deg); }
+  .dish.pho{ background: var(--peach); }
+  .dish.bundau{ background: var(--mint); }
+  .dish.buncha{ background: #ffd3e0; }
+  .dish.banhmi{ background: #ffe9a8; }
+  .dish.hutieu{ background: #cdeaff; }
+  .dish.banhxeo{ background: #ffd9c2; }
+
+  .comtam{
+    position:absolute;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size: 17px;
+    color: #fff;
+    background: linear-gradient(180deg, var(--pink), var(--pink-deep));
+    border:none;
+    border-radius: 20px;
+    padding: 16px 26px;
+    cursor:pointer;
+    box-shadow: 0 6px 0 rgba(255,122,162,.5);
+    transition: transform .12s ease;
+    left:50%; bottom: 22px; transform: translateX(-50%);
+  }
+  .comtam:hover{ transform: translateX(-50%) translateY(-2px); }
+  .comtam:active{ transform: translateX(-50%) scale(.94); }
+
+  .hint{
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .reveal{
+    display:none;
+    margin-top: 24px;
+    background: var(--card);
+    border-radius: 24px;
+    padding: 30px 22px;
+    box-shadow: 0 8px 0 rgba(255,122,162,.25);
+    border: 2px solid var(--pink);
+  }
+  .reveal.show{ display:block; animation: pop .4s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes pop{ from{ transform: scale(.8); opacity:0; } to{ transform: scale(1); opacity:1; } }
+  .reveal h2{
+    font-family:'Baloo 2', sans-serif;
+    font-size: clamp(22px, 5vw, 30px);
+    margin: 0 0 6px;
+    color: var(--pink-deep);
+  }
+  .reveal p{ margin: 4px 0 0; font-size: 15px; color: var(--ink-soft); }
+
+  .confetti{ position:fixed; inset:0; pointer-events:none; z-index:5; }
+  .heart{
+    position:absolute; font-size: 20px;
+    animation: floatUp 1.6s ease-out forwards;
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(0) scale(.6) rotate(0deg); opacity:0; }
+    15%{ opacity:1; }
+    100%{ transform: translateY(-260px) scale(1.1) rotate(30deg); opacity:0; }
+  }
+
+  footer{
+    margin-top: 36px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    opacity:.6;
+  }
+
+  @media (max-width: 420px){
+    .dish{ font-size: 13.5px; padding: 12px 14px; }
+    .comtam{ font-size: 16px; padding: 15px 22px; }
+    h1{ font-size: 24px; }
+    .mascot{ font-size: 44px; }
+  }
+
+  @media (max-height: 700px){
+    .stage{ height: min(360px, 50vh); min-height: 260px; }
+  }
+</style>
+</head>
+<body>
+<div class="deco">
+  <span style="top:6%; left:6%;">🌸</span>
+  <span style="top:14%; right:8%;">🍡</span>
+  <span style="top:70%; left:4%;">🍥</span>
+  <span style="top:85%; right:10%;">🌸</span>
+  <span style="top:40%; left:2%;">💕</span>
+  <span style="top:50%; right:3%;">🍡</span>
+</div>
+
+<div class="wrap">
+  <div class="mascot">🍚</div>
+  <h1>Cơm nước gì chưa<br><span class="accent">người đẹp Tí Èn</span>? 💕</h1>
+  <p class="sub">Chọn 1 món đi bé Thúy Hiền, anh chạy đi mua liền á~</p>
+
+  <div class="counter" id="counter">Bé đã bấm hụt: 0 lần</div>
+  <div class="bubble" id="bubble"></div>
+
+  <div class="stage" id="stage">
+    <button class="dish pho" data-dish="Phở" style="left: 5%; top: 8%;">🍜 Phở</button>
+    <button class="dish bundau" data-dish="Bún đậu" style="right: 5%; top: 8%; left:auto;">🧆 Bún đậu</button>
+    <button class="dish buncha" data-dish="Bún chả" style="left: 5%; top: 38%;">🍖 Bún chả</button>
+    <button class="dish banhmi" data-dish="Bánh mì" style="right: 5%; top: 38%; left:auto;">🥖 Bánh mì</button>
+    <button class="dish hutieu" data-dish="Hủ tiếu" style="left: 5%; top: 66%;">🍲 Hủ tiếu</button>
+    <button class="dish banhxeo" data-dish="Bánh xèo" style="right: 5%; top: 66%; left:auto;">🥞 Bánh xèo</button>
+    <button class="comtam" id="comtam">🍛 Cơm tấm</button>
+  </div>
+
+  <p class="hint">(gợi ý nhỏ: có 1 món không né đâu 😏)</p>
+
+  <div class="reveal" id="reveal">
+    <h2>Xíu anh mua cho bé 🥰</h2>
+    <p>Cơm tấm sườn bì chả nha, chờ anh xíu là có liền!</p>
+  </div>
+
+  <footer>made with 🧡 dành cho người đẹp Thúy Hiền</footer>
+</div>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const bubble = document.getElementById('bubble');
+  const counterEl = document.getElementById('counter');
+  const reveal = document.getElementById('reveal');
+  const confettiLayer = document.getElementById('confetti');
+
+  let dodgeCount = 0;
+
+  const taunts = [
+    "Ơ, chạy mất tiêu rồi 😝",
+    "Nhanh tay lên nào~",
+    "Món này hôm nay nghỉ bán 🙈",
+    "Hong có đâu, chọn món khác đi",
+    "Ế ẩm ghê, born to dodge 🏃‍♀️",
+    "Chậm thế bé ơiii",
+    "Gần tới nơi rồi... không đâu 😂",
+    "Món này kén bé lắm nha",
+    "Thử lại đi, biết đâu hụt tiếp",
+    "Trốn kỹ ghê chưa 🐢"
+  ];
+
+  function showBubble(text){
+    bubble.textContent = text;
+    bubble.classList.add('show');
+    clearTimeout(showBubble._t);
+    showBubble._t = setTimeout(() => bubble.classList.remove('show'), 1300);
+  }
+
+  function bumpCounter(){
+    dodgeCount++;
+    counterEl.textContent = `Bé đã bấm hụt: ${dodgeCount} lần`;
+    counterEl.classList.add('bump');
+    setTimeout(() => counterEl.classList.remove('bump'), 150);
+  }
+
+  function dodge(btn){
+    const stageRect = stage.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const padding = 10;
+    const maxLeft = stageRect.width - btnRect.width - padding;
+    const maxTop = stageRect.height - btnRect.height - padding;
+    const newLeft = Math.max(padding, Math.random() * maxLeft);
+    const newTop = Math.max(padding, Math.random() * maxTop);
+    btn.style.left = newLeft + 'px';
+    btn.style.top = newTop + 'px';
+    btn.style.right = 'auto';
+    btn.style.bottom = 'auto';
+  }
+
+  const dishButtons = document.querySelectorAll('.dish');
+  dishButtons.forEach(btn => {
+    ['pointerdown', 'touchstart', 'mouseenter'].forEach(evt => {
+      btn.addEventListener(evt, (e) => {
+        if (evt !== 'mouseenter') e.preventDefault();
+        dodge(btn);
+        bumpCounter();
+        showBubble(taunts[Math.floor(Math.random() * taunts.length)]);
+      }, { passive: false });
+    });
+    btn.addEventListener('click', (e) => e.preventDefault());
+  });
+
+  function burstHearts(){
+    const emojis = ['💕','💗','🌸','🍛','✨'];
+    for (let i = 0; i < 24; i++){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      h.style.left = (45 + Math.random() * 10) + 'vw';
+      h.style.top = (60 + Math.random() * 10) + 'vh';
+      h.style.animationDelay = (Math.random() * 0.3) + 's';
+      confettiLayer.appendChild(h);
+      setTimeout(() => h.remove(), 2000);
+    }
+  }
+
+  document.getElementById('comtam').addEventListener('click', () => {
+    dishButtons.forEach(b => {
+      b.style.transition = 'opacity .3s ease, transform .3s ease';
+      b.style.opacity = '0';
+      b.style.transform = 'scale(.7)';
+      b.style.pointerEvents = 'none';
+    });
+    reveal.classList.add('show');
+    burstHearts();
+    showBubble('Cơm tấm thắng rồi hihi 🏆');
+  });
+</script>
+</body>
+</html>
